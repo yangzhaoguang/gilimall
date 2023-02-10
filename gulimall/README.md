@@ -18,7 +18,7 @@
 
 第三方服务使用了阿里云的OSS对象存储、阿里云云短信、以及微博的社交登录
 
-![image-20230210145637294](images/image-20230210145637294.png)
+![image](https://user-images.githubusercontent.com/102777678/218044427-ba817a19-c691-4b53-a64f-79cb39b2c1ae.png)
 
 
 
@@ -45,7 +45,8 @@ gulimall
 └── gulimall-member -- 会员服务
 ```
 
-![image-20230210150455700](images/image-20230210150455700.png)
+![image](https://user-images.githubusercontent.com/102777678/218044377-789f707a-798e-4415-8f2f-5f1a29739165.png)
+
 
 
 
