@@ -1,0 +1,20 @@
+spring:
+    cloud:
+        nacos:
+            discovery:
+                server-addr: localhost:8848
+        alicloud:
+            access-key: LTAI5tN6f2XJui5k1GnzvovR
+            secret-key: BWuYkEzdrhMc8aeTQ0kbmNknQQ4Xg2
+            oss:
+                endpoint: oss-cn-hangzhou.aliyuncs.com
+                bucket: gulimall-bucket-2022
+            sms:
+                access-key-id: LTAI5tGjb9ShtDqouVfYRbQD
+                access-key-secret: N6Ee5EDar2YgQqTmegGWth7Tp3qmU7
+                sign-name: TaGao
+                template-code: SMS_250740234
+    application:
+        name: gulimall-third-party
+server:
+    port: 30000

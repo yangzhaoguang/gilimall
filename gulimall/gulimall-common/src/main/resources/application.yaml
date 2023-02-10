@@ -1,0 +1,20 @@
+# 数据库配置
+spring:
+    datasource:
+        url: jdbc:mysql://192.168.56.111:3306/gulimall_pms
+        username: root
+        password: root
+        driver-class-name: com.mysql.jdbc.Driver
+    cloud:
+        nacos:
+            config:
+                server-addr: localhost:8848
+
+# MyBatis-Plus配置
+mybatis-plus:
+    mapper-locations: classpath:/mapper/**/*.xml # mapper映射文件的位置
+    global-config:
+        db-config:
+            id-type: auto # 主键自增策略
+server:
+    port: 7000

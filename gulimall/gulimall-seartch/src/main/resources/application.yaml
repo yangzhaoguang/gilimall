@@ -1,0 +1,21 @@
+spring:
+    cloud:
+        nacos:
+            discovery:
+                server-addr: localhost:8848
+    
+    
+    application:
+        name: gulimall-seartch
+    thymeleaf:
+        cache: false
+    redis:
+        host: 192.168.56.111
+        timeout: 1000000
+        
+    session:
+        store-type: redis
+
+
+server:
+    port: 13000

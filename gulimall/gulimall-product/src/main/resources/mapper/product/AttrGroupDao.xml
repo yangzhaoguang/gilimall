@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atguigu.gulimall.product.dao.AttrGroupDao">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.atguigu.gulimall.product.entity.AttrGroupEntity" id="attrGroupMap">
+        <result property="attrGroupId" column="attr_group_id"/>
+        <result property="attrGroupName" column="attr_group_name"/>
+        <result property="sort" column="sort"/>
+        <result property="descript" column="descript"/>
+        <result property="icon" column="icon"/>
+        <result property="catelogId" column="catelog_id"/>
+    </resultMap>
+
+    <!--自定义封装结果集，只要有嵌套属性一定要自定义结果集-->
+    <!--
+        type 返回集合里面的元素类型
+        如果内部类，使用 $ 代替 .
+    -->
+    <resultMap id="SpuItemAttrGroupVo" type="com.atguigu.gulimall.product.vo.SkuItemVo$SpuItemAttrGroupVo" >
+        <result property="groupName" column="attr_group_name" />
+        <!--attrs 是一个集合，必须指明-->
+        <collection property="attrs" ofType="com.atguigu.gulimall.product.vo.SkuItemVo$SpuBaseAttr">
+            <result property="attrName" column="attr_name" />
+            <result property="attrValue" column="attr_value" />
+        </collection>
+
+    </resultMap>
+
+
+    <!--resultMap 指定返回类型是自定义的结果集-->
+    <select id="getAttrGroupWithAttrsBySpuId" resultMap="SpuItemAttrGroupVo">
+
+        select ag.`catelog_id`, ag.`attr_group_name`,pav.`attr_name`, pav.`attr_value`,aar.`attr_id`,ag.`attr_group_id`
+        from pms_attr_group ag
+                 left join `pms_attr_attrgroup_relation` aar
+                           on aar.`attr_group_id` = ag.`attr_group_id`
+                 left join `pms_product_attr_value` pav
+                           on pav.`attr_id` = aar.`attr_id`
+        where ag.`catelog_id`=#{catelogId} and pav.`spu_id`=#{spuId}
+
+    </select>
+
+
+
+</mapper>

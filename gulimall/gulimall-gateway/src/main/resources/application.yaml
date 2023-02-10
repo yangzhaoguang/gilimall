@@ -1,0 +1,102 @@
+spring:
+    cloud:
+        nacos:
+            discovery:
+                server-addr: localhost:8848
+        gateway:
+            routes:
+#                - id: baidu_route
+#                  uri: https://www.baidu.com
+#                  predicates:
+#                      - Query=url,baidu
+#                - id: qq_route
+#                  uri: https://www.qq.com
+#                  predicates:
+#                      - Query=url,qq
+    
+#                - id: hello_route
+#                  uri: lb://gulimall-product # 负载均衡
+#                  predicates:
+#                      - Path=/hello
+
+                - id: product_route
+                  uri: lb://gulimall-product # 负载均衡
+                  predicates:
+                      - Path=/api/product/**
+                  filters:
+                      - RewritePath=/api/?(?<segment>.*), /$\{segment}  #路径重写
+
+                - id: coupon_route
+                  uri: lb://gulimall-coupon # 负载均衡
+                  predicates:
+                      - Path=/api/coupon/**
+                  filters:
+                      - RewritePath=/api/?(?<segment>.*), /$\{segment}  #路径重写
+
+                - id: third_party_route
+                  uri: lb://gulimall-third-party # 负载均衡
+                  predicates:
+                      - Path=/api/thirdparty/**
+                  filters:
+                      - RewritePath=/api/thirdparty/?(?<segment>.*), /$\{segment}  #路径重写
+                      
+                - id: member_route
+                  uri: lb://gulimall-member # 负载均衡
+                  predicates:
+                      - Path=/api/member/**
+                  filters:
+                      - RewritePath=/api/?(?<segment>.*), /$\{segment}  #路径重写
+
+                - id: ware_route
+                  uri: lb://gulimall-ware # 负载均衡
+                  predicates:
+                      - Path=/api/ware/**
+                  filters:
+                      - RewritePath=/api/?(?<segment>.*), /$\{segment}  #路径重写
+                      
+                      
+                - id: admin_route
+                  uri: lb://renren-fast # 负载均衡
+                  predicates:
+                      - Path=/api/**
+                  filters:
+                      - RewritePath=/api/?(?<segment>.*), /renren-fast/$\{segment}  #路径重写
+
+                - id: gulimall_host_route
+                  uri: lb://gulimall-product # 负载均衡
+                  predicates:
+                      - Host=gulimall.com,item.gulimall.com
+
+                - id: gulimall_search_route
+                  uri: lb://gulimall-seartch # 负载均衡
+                  predicates:
+                      - Host=search.gulimall.com
+                      
+                - id: gulimall-auth-route
+                  uri: lb://gulimall-auth-server # 负载均衡
+                  predicates:
+                      - Host=auth.gulimall.com
+
+                - id: gulimall-cart-route
+                  uri: lb://gulimall-cart # 负载均衡
+                  predicates:
+                      - Host=cart.gulimall.com
+
+                - id: gulimall-order-route
+                  uri: lb://gulimall-order # 负载均衡
+                  predicates:
+                      - Host=order.gulimall.com
+
+                - id: gulimall-member-route
+                  uri: lb://gulimall-member # 负载均衡
+                  predicates:
+                      - Host=member.gulimall.com
+
+                - id: gulimall-seckill-route
+                  uri: lb://gulimall-seckill # 负载均衡
+                  predicates:
+                      - Host=seckill.gulimall.com
+    application:
+        name: gulimall-gateway
+server:
+    port: 88
